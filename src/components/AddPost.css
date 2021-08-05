@@ -1,0 +1,36 @@
+.addpost {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 15rem;
+  align-items: center;
+}
+
+.input__title {
+  padding: 1rem;
+  margin: 1rem;
+  width: 60%;
+  font-size: large;
+  border-radius: 0.7rem;
+  border: 1.2px solid #66fcf1;
+  color: #45a29e;
+  outline: none;
+}
+
+.input__body {
+  padding: 1rem;
+  width: 60%;
+  font-size: large;
+  margin-bottom: 1rem;
+  border-radius: 0.7rem;
+  border: 1.2px solid #66fcf1;
+  color: #45a29e;
+  outline: none;
+}
+
+.submit--btn {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background-color: #66fcf1;
+  border: none;
+  border-radius: 0.7rem;
+}

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments, getPosts } from "../modules/posts/Posts.actions";
+import "./PostDetail.css";
 
 function PostDetail() {
   const dispatch = useDispatch();
@@ -24,9 +25,11 @@ function PostDetail() {
   //   const post = getPostDetails(posts, postId);
 
   return (
-    <div>
-      <h1>Lets see the details!!</h1>
-      <Link to="/">See All Posts</Link>
+    <div className="postDetails">
+      <Link className="goBack" to="/">
+        See All Posts
+      </Link>
+      <div className="heading">Comments</div>
       {/* <div>
         <h3>{post.title}</h3>
         <h6>{post.body}</h6>
@@ -36,9 +39,10 @@ function PostDetail() {
       {comments.length > 0 &&
         comments.map((comment) => {
           return (
-            <div>
-              <h4 style={{ color: "green" }}>{comment.name}</h4>
-              <h5>{comment.body}</h5>
+            <div className="postDetails__comments">
+              <div className="comment--name">{comment.name}</div>
+              <small className="comment--email">{comment.email}</small>
+              <div className="comment--body">{comment.body}</div>
             </div>
           );
         })}

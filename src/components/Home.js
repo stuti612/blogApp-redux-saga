@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPosts } from "../modules/posts/Posts.actions";
+import "./Home.css";
 
 function Home() {
   const dispatch = useDispatch();
@@ -13,18 +14,17 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Look at all the posts here</h1>
+    <div className="home">
       {posts.loading && <p>Loading...</p>}
       {error && !loading && <p>{error}</p>}
       {posts.length > 0 &&
         posts.map((post) => {
           return (
-            <div>
-              <Link to={`/post/${post.id}`}>
-                <h1 style={{ color: "red" }}>{post.title}</h1>
+            <div className="post--card">
+              <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
+                <div className="post--title">{post.title}</div>
               </Link>
-              <h4>{post.body}</h4>
+              <div className="post--body">{post.body}</div>
             </div>
           );
         })}
