@@ -1,5 +1,5 @@
 export const getPosts = () => {
-  return fetch("https://jsonplaceholder.typicode.com/posts")
+  return fetch(`https://jsonplaceholder.typicode.com/posts`)
     .then((response) => response.json())
     .then((json) => json)
     .catch((error) => Promise.reject(error));

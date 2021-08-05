@@ -10,7 +10,7 @@ import {
   getCommentsSuccess,
   getCommentsFailed,
 } from "./Posts.actions";
-import { getPosts, addPost, getPostDetails } from "../../utils/api";
+import { getPosts, addPost, getPostDetails, getPost1 } from "../../utils/api";
 
 function* getPostsSaga() {
   try {

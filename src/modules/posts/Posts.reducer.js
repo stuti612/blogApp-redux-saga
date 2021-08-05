@@ -15,6 +15,7 @@ const initialState = {
   posts: [],
   error: null,
   comments: [],
+  post: [],
 };
 
 export default (state = initialState, action) => {

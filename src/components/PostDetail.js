@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments, getPosts } from "../modules/posts/Posts.actions";
+import { getComments } from "../modules/posts/Posts.actions";
 import "./PostDetail.css";
 
 function PostDetail() {
@@ -10,13 +10,12 @@ function PostDetail() {
 
   useEffect(() => {
     dispatch(getComments({ postId }));
-    // dispatch(getPosts());
   }, []);
 
   //   function getPostDetails(posts, postId) {
   //     return posts.find((post) => post.id === postId);
   //   }
-
+  const post1 = useSelector((state) => state.posts.post);
   const comments = useSelector((state) => state.posts.comments);
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
