@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import AddPost from "./components/AddPost";
 import PostDetail from "./components/PostDetail";
+import UserDetail from "./components/UserDetail";
 import { useDispatch } from "react-redux";
 import "./App.css";
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/post/:postId" element={<PostDetail />} />
+        <Route path="/users/:userId" element={<UserDetail />} />
       </Routes>
     </div>
   );

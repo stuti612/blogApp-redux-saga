@@ -8,6 +8,10 @@
   align-items: stretch;
 }
 
+.username {
+  color: #66fcf1;
+}
+
 .post--card {
   margin: 1rem 15rem;
   border: 1.2px solid #66fcf1;

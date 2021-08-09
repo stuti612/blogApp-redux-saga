@@ -26,7 +26,7 @@ const initialState = {
   comments: [],
   particularPost: [],
   users: [],
-  particularUser: [],
+  particularUser: {},
 };
 
 export default (state = initialState, action) => {

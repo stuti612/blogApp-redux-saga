@@ -38,8 +38,11 @@ function Home() {
               <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
                 <div className="post--title">{post.title}</div>
               </Link>
-              <Link to={`/users/${post.userId}`}>
-                <p>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/users/${post.userId}`}
+              >
+                <p className="username">
                   By: {users.find((user) => user.id === post.userId)?.username}
                 </p>
               </Link>

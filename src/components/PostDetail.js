@@ -12,31 +12,34 @@ function PostDetail() {
   const dispatch = useDispatch();
   const { postId } = useParams();
 
-  const particularPost = useSelector((state) => state.posts.particularPost);
-  const comments = useSelector((state) => state.posts.comments);
-  const loading = useSelector((state) => state.posts.loading);
-  const error = useSelector((state) => state.posts.error);
-  const particularUser = useSelector((state) => state.posts.particularUser);
-  console.log(particularPost);
+  const posts = useSelector((state) => state.posts);
+  const { particularPost, comments, loading, error, particularUser } = posts;
+  const { userId } = particularPost;
 
   useEffect(() => {
     dispatch(getParticularPost({ postId }));
     dispatch(getComments({ postId }));
-    dispatch(getParticularUser(particularPost.userId));
   }, []);
+
+  useEffect(() => {
+    dispatch(getParticularUser({ userId }));
+  }, [userId]);
 
   return (
     <div className="postDetails">
       <Link className="goBack" to="/">
         See All Posts
       </Link>
-      <div className="heading">Comments</div>
-      <div>
-        <h3>{particularPost.title}</h3>
-        <Link to={`/users/${particularPost.userId}`}>
-          <p>@{particularUser.username}</p>
+      <div className="post">
+        <h3 className="post--title">{particularPost.title}</h3>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/users/${particularPost.userId}`}
+        >
+          <p className="post--username">@{particularUser.username}</p>
         </Link>
-        <h6>{particularPost.body}</h6>
+        <h6 className="post--body">{particularPost.body}</h6>
+        <div className="heading">Comments</div>
       </div>
       {comments.loading && <p>Loading...</p>}
       {error && !loading && <p>{error}</p>}

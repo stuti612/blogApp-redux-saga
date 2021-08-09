@@ -4,6 +4,10 @@
   align-items: stretch;
 }
 
+.post {
+  margin: 1rem 15rem;
+}
+
 .goBack {
   margin: 1rem 15rem;
   text-decoration: none;
@@ -12,7 +16,7 @@
 }
 
 .heading {
-  margin: 0rem 15rem;
+  margin-top: 1rem;
   font-size: 2rem;
   color: #66fcf1;
 }
@@ -37,4 +41,8 @@
 .comment--body {
   color: #c5c6c7;
   margin-top: 0.7rem;
+}
+
+.post--username {
+  color: #66fcf1;
 }
