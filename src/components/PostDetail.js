@@ -1,27 +1,29 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../modules/posts/Posts.actions";
+import {
+  getComments,
+  getParticularPost,
+  getParticularUser,
+} from "../modules/posts/Posts.actions";
 import "./PostDetail.css";
 
 function PostDetail() {
   const dispatch = useDispatch();
   const { postId } = useParams();
 
-  useEffect(() => {
-    dispatch(getComments({ postId }));
-  }, []);
-
-  //   function getPostDetails(posts, postId) {
-  //     return posts.find((post) => post.id === postId);
-  //   }
-  const post1 = useSelector((state) => state.posts.post);
+  const particularPost = useSelector((state) => state.posts.particularPost);
   const comments = useSelector((state) => state.posts.comments);
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
-  //   const posts = useSelector((state) => state.posts.posts);
+  const particularUser = useSelector((state) => state.posts.particularUser);
+  console.log(particularPost);
 
-  //   const post = getPostDetails(posts, postId);
+  useEffect(() => {
+    dispatch(getParticularPost({ postId }));
+    dispatch(getComments({ postId }));
+    dispatch(getParticularUser(particularPost.userId));
+  }, []);
 
   return (
     <div className="postDetails">
@@ -29,10 +31,13 @@ function PostDetail() {
         See All Posts
       </Link>
       <div className="heading">Comments</div>
-      {/* <div>
-        <h3>{post.title}</h3>
-        <h6>{post.body}</h6>
-      </div> */}
+      <div>
+        <h3>{particularPost.title}</h3>
+        <Link to={`/users/${particularPost.userId}`}>
+          <p>@{particularUser.username}</p>
+        </Link>
+        <h6>{particularPost.body}</h6>
+      </div>
       {comments.loading && <p>Loading...</p>}
       {error && !loading && <p>{error}</p>}
       {comments.length > 0 &&

@@ -8,6 +8,15 @@ import {
   GET_POSTS,
   GET_POSTS_FAILED,
   GET_POSTS_SUCCESS,
+  GET_PARTICULAR_POST,
+  GET_PARTICULAR_POST_SUCCESS,
+  GET_PARTICULAR_POST_FAILED,
+  GET_PARTICULAR_USER,
+  GET_PARTICULAR_USER_SUCCESS,
+  GET_PARTICULAR_USER_FAILED,
+  GET_USERS,
+  GET_USERS_SUCCESS,
+  GET_USERS_FAILED,
 } from "./Posts.actions";
 
 const initialState = {
@@ -15,7 +24,9 @@ const initialState = {
   posts: [],
   error: null,
   comments: [],
-  post: [],
+  particularPost: [],
+  users: [],
+  particularUser: [],
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +43,23 @@ export default (state = initialState, action) => {
         posts: action.payload,
       };
     case GET_POSTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.message,
+      };
+    case GET_PARTICULAR_POST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_PARTICULAR_POST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        particularPost: action.payload,
+      };
+    case GET_PARTICULAR_POST_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -66,6 +94,40 @@ export default (state = initialState, action) => {
         comments: action.payload,
       };
     case GET_COMMENTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.message,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_USERS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        users: action.payload,
+      };
+    case GET_USERS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.message,
+      };
+    case GET_PARTICULAR_USER:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_PARTICULAR_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        particularUser: action.payload,
+      };
+    case GET_PARTICULAR_USER_FAILED:
       return {
         ...state,
         isLoading: false,

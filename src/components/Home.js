@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getPosts } from "../modules/posts/Posts.actions";
+import { getPosts, getUsers } from "../modules/posts/Posts.actions";
 import "./Home.css";
 import Pagination from "./Pagination";
 
@@ -10,12 +10,15 @@ function Home() {
   const posts = useSelector((state) => state.posts.posts);
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
+  const users = useSelector((state) => state.posts.users);
+  console.log(users);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getUsers());
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -34,6 +37,11 @@ function Home() {
             <div className="post--card">
               <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
                 <div className="post--title">{post.title}</div>
+              </Link>
+              <Link to={`/users/${post.userId}`}>
+                <p>
+                  By: {users.find((user) => user.id === post.userId)?.username}
+                </p>
               </Link>
               <div className="post--body">{post.body}</div>
             </div>

@@ -1,4 +1,11 @@
-import { takeEvery, all, call, put, takeLeading } from "redux-saga/effects";
+import {
+  takeEvery,
+  all,
+  call,
+  put,
+  takeLeading,
+  takeLatest,
+} from "redux-saga/effects";
 import {
   GET_POSTS,
   getPostsSuccess,
@@ -9,8 +16,24 @@ import {
   GET_COMMENTS,
   getCommentsSuccess,
   getCommentsFailed,
+  GET_PARTICULAR_POST,
+  getParticularPostSuccess,
+  getParticularPostFailed,
+  getParticularUserSuccess,
+  getParticularUserFailed,
+  GET_PARTICULAR_USER,
+  getUsersSuccess,
+  getUsersFailed,
+  GET_USERS,
 } from "./Posts.actions";
-import { getPosts, addPost, getPostDetails, getPost1 } from "../../utils/api";
+import {
+  getPosts,
+  addPost,
+  getPostDetails,
+  getParticularPost,
+  getParticularUser,
+  getUsers,
+} from "../../utils/api";
 
 function* getPostsSaga() {
   try {
@@ -24,6 +47,19 @@ function* getPostsSaga() {
 
 function* getPostsWatcher() {
   yield takeEvery(GET_POSTS, getPostsSaga);
+}
+
+function* getParticularPostSaga(action) {
+  try {
+    const data = yield call(getParticularPost, action.payload.postId); //calling the api function
+    yield put(getParticularPostSuccess(data));
+  } catch (error) {
+    yield put(getParticularPostFailed(error.message));
+  }
+}
+
+function* getParticularPostWatcher() {
+  yield takeEvery(GET_PARTICULAR_POST, getParticularPostSaga);
 }
 
 function* addPostsSaga(action) {
@@ -52,6 +88,39 @@ function* getCommentsWatcher() {
   yield takeEvery(GET_COMMENTS, getCommentsSaga);
 }
 
+function* getUsersSaga() {
+  try {
+    const data = yield call(getUsers);
+    yield put(getUsersSuccess(data));
+  } catch (error) {
+    yield put(getUsersFailed(error.message));
+  }
+}
+
+function* getUsersWatcher() {
+  yield takeEvery(GET_USERS, getUsersSaga);
+}
+
+function* getParticularUserSaga(action) {
+  try {
+    const data = yield call(getParticularUser, action.payload.userId);
+    yield put(getParticularUserSuccess(data));
+  } catch (error) {
+    yield put(getParticularUserFailed(error.message));
+  }
+}
+
+function* getParticularUserWatcher() {
+  yield takeEvery(GET_PARTICULAR_USER, getParticularUserSaga);
+}
+
 export default function* postsSaga() {
-  yield all([getPostsWatcher(), addPostWatcher(), getCommentsWatcher()]);
+  yield all([
+    getPostsWatcher(),
+    addPostWatcher(),
+    getCommentsWatcher(),
+    getParticularPostWatcher(),
+    getUsersWatcher(),
+    getParticularUserWatcher(),
+  ]);
 }
